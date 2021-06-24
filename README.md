@@ -32,3 +32,68 @@ call stack이 완전히 빌 때까지 처리한다는 것과 동일.
 이를 __offloading 이라고하며 ,Node 서버의 메인 스레드가 하나임에도 불구하고 빠르게 동작할 수 있는 이유.__
 
 
+# Hoisting - var
+
+hosting 이란 변수의 선언만을 해당 스코프의 맨 위로 끌어올린것을 말함.
+<pre>
+    console.log(x);                             var x;
+    var x = 1;              -->                 console.log(x);
+    // OUTPUT = undefined;                      x = 1;
+</pre>
+
+function도 hositing 대상이다.
+
+__함수의 선언과 값의 초기화는 서로 다르다.__
+
+# Function, lexical scope
+
+코드의 어떤 식별자가 실제로 어떤 값이 가리키는지를 결정하는 것을 binding이라고한다.
+
+자바스크립트에서의 binding은 lexical scope를 통해서만 이뤄짐.
+
+_lexical scope란 안쪽에서 바깥쪽 변수에 접근할 수 있는것._
+
+lexical scope는 밖에서 안을 참조할 수 없음.
+
+> var은 block scoping의 대상이 아니다.
+
+# Closure
+> closure  = function + environment
+
+closure은 function이 하나 생길때 마다 하나씩 생긴다.
+environment는 함수 자신을 둘러싼, 접근할 수 있는 모든 스코프를 뜻한다.
+
+<pre>
+    function and(x) 
+    {
+        return function print(y)
+        {
+            return x + 'and' + y;
+        }
+    }
+    const saltand = and('salt');    
+    console.log(saltand('pepper')); //OUTPUT : salt and pepper
+    console.log(saltand('sugur'));  //OUTPUT : salt and sugar
+</pre>
+
+and 함수로 만들어진 saltAnd의 closure는 
+- 함수 : print
+- 환경 : x -> "salt"
+closure는 higher-order function을 만드는데 유용
+
+<pre>
+    f : function
+    f foo()
+    {
+        f bar(){}
+        f baz(){}
+    }
+    foo(); -- 1
+    foo(); -- 2
+</pre>
+위 코드에서는 closure이 총 5개 생김
+
+이유는 코드가 실행되면서 foo() 함수의 closure이 하나 생성되고 
+1의 foo()가 실행되면서 foo() 함수안의 bar,baz의 closure이 생성되면 총 3개가 되고
+
+2에서 실행이되면 기존의 foo()를 제되한 bar,baz는 새로운 함수로 판단하여 개가 더 생기기 때문.
