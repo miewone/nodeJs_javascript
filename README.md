@@ -97,3 +97,19 @@ closure는 higher-order function을 만드는데 유용
 1의 foo()가 실행되면서 foo() 함수안의 bar,baz의 closure이 생성되면 총 3개가 되고
 
 2에서 실행이되면 기존의 foo()를 제되한 bar,baz는 새로운 함수로 판단하여 개가 더 생기기 때문.
+
+
+# let, const
+
+hoisting 규칙이 없고, block scoping을 지원함.
+
+let과 const의 예측 가능성과 유지보수성이 var보다 좋다.
+## let
+- 레퍼런스가 바뀔 수 있음
+- 한번을 넘어서는 선언을 할 수 없음.
+
+## const
+- 상수
+
+# Spread syntax (...)
+Object 뿐 만 아니라 배열에서도 사용 할 수 있음.
