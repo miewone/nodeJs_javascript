@@ -20,7 +20,7 @@ Object.setPrototypeOf(Student.prototype, Person.prototype);
 
 const me = new Student("park");
 console.log(me.greet());
-console.log(me.study());
+console.log(me.study()); 
 
 console.log(me instanceof Student);
 console.log(me instanceof Person);

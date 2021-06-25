@@ -113,3 +113,15 @@ let과 const의 예측 가능성과 유지보수성이 var보다 좋다.
 
 # Spread syntax (...)
 Object 뿐 만 아니라 배열에서도 사용 할 수 있음.
+
+
+# Promise
+
+revole , reject 중 둘중 하나만 먼저 실행된것중 하나만 실행한다.
+
+스코프 분리가 됨으로써 오류 발생률이 떨어진다. 
+
+# Polyfill
+
+JS standard library에 표준으로 등록되어 있으나, 아직 브라우저나 Node.js에서 구현되지 않은 기능을 미리 써 볼 수 있도록 만들어진 구현체
+> core.js
