@@ -125,3 +125,56 @@ revole , reject 중 둘중 하나만 먼저 실행된것중 하나만 실행한�
 
 JS standard library에 표준으로 등록되어 있으나, 아직 브라우저나 Node.js에서 구현되지 않은 기능을 미리 써 볼 수 있도록 만들어진 구현체
 > core.js
+
+# Stream
+
+> File, Network Input --> Handelr
+
+Stream 은 스트림 가능한 소스로부터 데이터를 작은 청크로 쪼개 처리할 수 있게 한다.
+
+큰데이터를 처리해야하거나, 비동기적으로만 어등ㄹ 수 있는 데이터를 처리해야할 때 유용
+
+## 일반적인 구현 형태
+<pre>
+    const fs = require('fs')
+    const rs = fs.createReadStream('[FILENAME]', [encoding:'utf-8'])
+
+    rs.on('data',data => {
+        // Do something with data...
+    })
+
+    rs.on('error,error => {
+        // Do Error Exception
+    })
+
+    rs.on('end', () => {
+        // done
+    })
+</pre>
+
+## Stream 종류
+
+### Readable
+> 스르팀으로부터 읽을 수 있음.
+- fs.createREadStream
+- process.stdin
+- _서버입장의_ HTTP 요청
+- 클라이언트 입장의 HTTP 응답
+
+### Writeable
+> 스트림에 출력 할 수 있음.
+- fs.createWriteStream
+- process.stdout
+- _클라이언트_ 입장의 HTTP 요청
+- 서버 입장의 HTTP 응답.
+
+### Duplex
+> 스트림에 입력을 받을 수도있고, 출력을 보낼 수도 있음.
+- TCP sockets
+- zlib streams - 압축 알고리즘 스트림.
+- crypto streams - 암호화 알고리즘 스트림.
+
+### Transform
+> 입력받은 스트림을 변환해 새로움 스트림으로 만듬.
+- zlib streams
+- crypto streams
